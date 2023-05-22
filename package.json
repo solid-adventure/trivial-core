@@ -1,0 +1,31 @@
+{
+  "name": "trivial-rules",
+  "version": "1.0.2",
+  "description": "Build event processors to apply business rules",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha 'test/**/*.js'"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-cloudwatch-logs": "^3.28.0",
+    "@aws-sdk/client-elastic-load-balancing-v2": "^3.27.0",
+    "@aws-sdk/client-lambda": "^3.27.0",
+    "@aws-sdk/client-route-53": "^3.27.0",
+    "acorn": "^8.4.1",
+    "adm-zip": "^0.5.5",
+    "astray": "^1.1.1",
+    "fast-redact": "^3.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "pino": "^7.0.0-rc.1",
+    "pino-http": "^5.6.0",
+    "pg": "^7.17.0",
+    "socksjs": "^0.5.0"
+  },
+  "devDependencies": {
+    "lunr": "^2.3.9",
+    "mocha": "^9.0.2"
+  }
+
+}
