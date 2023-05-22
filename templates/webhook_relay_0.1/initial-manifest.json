@@ -1,0 +1,72 @@
+{
+  "template": "webhook_relay",
+  "version": "0.1",
+  "app_id": "",
+  "listen_at": {
+    "host": "localhost",
+    "port": "",
+    "verb": "post",
+    "path": "/webhooks/receive"
+  },
+  "log_to": {
+    "host": "https://trivial-api-staging.herokuapp.com",
+    "port": "443",
+    "verb": "post",
+    "path": "/webhooks"
+  },
+  "filters": {},
+  "processors": [],
+  "blocks": [],
+  "manifest_version": 2,
+  "definitions": [],
+  "program": {
+    "identifier": "1",
+    "name": "",
+    "inputName": null,
+    "outputName": null,
+    "type": "ReceiveWebhook",
+    "definition": {
+      "actions": [
+        {
+          "identifier": "2",
+          "name": "SendResponse",
+          "inputName": null,
+          "outputName": null,
+          "type": "ActionWithTransform",
+          "definition": {
+            "actions": [
+              {
+                "identifier": "3",
+                "name": null,
+                "inputName": null,
+                "outputName": null,
+                "type": "Transform",
+                "definition": {
+                  "from": "GenericObject",
+                  "to": "HTTPResponse",
+                  "transformations": [
+                    {
+                      "from": "payload.body",
+                      "to": "body"
+                    },
+                    {
+                      "from": "payload.status",
+                      "to": "status"
+                    }
+                  ]
+                }
+              },
+              {
+                "identifier": "4",
+                "name": null,
+                "inputName": null,
+                "outputName": null,
+                "type": "SendResponse"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
