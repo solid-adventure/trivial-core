@@ -1,7 +1,7 @@
 const {
     schema,
     arrayOf
-  } = require('../../../Trivial/schema-utils')
+  } = require('../../../schema-utils')
 
   const {{service}}Field = schema({fields: {
   }})
