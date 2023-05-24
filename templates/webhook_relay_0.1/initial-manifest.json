@@ -1,7 +1,7 @@
 {
   "template": "webhook_relay",
   "version": "0.1",
-  "app_id": "",
+  "app_id": "example_app",
   "listen_at": {
     "host": "localhost",
     "port": "",
