@@ -6,8 +6,7 @@ Trivial core builds event-processing apps from templates.
 
 Building an example webhook processor app from a template.
 ```javascript
-const AppBuilder = require('trivial-core/AppBuilder')
-const AppTemplate = require('trivial-core/AppTemplate')
+const { AppBuilder, AppTemplate } = require('trivial-core')
 
 async function WriteExample() {
   const template = new AppTemplate('webhook_relay', '0.1')
