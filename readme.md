@@ -1,6 +1,6 @@
 
 # Trivial-Core
-Trivial core builds event-processing apps from templates.
+Build event-driven apps from templates.
 
 ## Getting Started
 
