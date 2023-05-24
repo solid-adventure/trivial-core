@@ -178,7 +178,7 @@ describe("webhook_relay 0.1 (lambda invocation)", () => {
 
   after(async () => {
     await logServer.stop()
-    // await builder.teardown() TEMP
+    await builder.teardown()
     restoreEnv()
   })
 
