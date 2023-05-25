@@ -1,6 +1,6 @@
 
 # Trivial-Core
-Build event-driven apps from templates.
+Build event-driven apps from templates. Full documentation at [trivial-js.org](https://trivial-js.org).
 
 ## Getting Started
 
