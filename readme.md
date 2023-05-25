@@ -44,6 +44,21 @@ with a JSON body, eg:
 }
 ```
 
+## Running Tests
+```shell
+npm test
+```
+
+```javascript
+//  Expected output
+
+//> trivial-core@1.0.2 test
+//> mocha 'test/**/*.js'
+//  ...
+//  456 passing (784ms)
+//  2 pending
+```
+
 ## Local Development
 If you're making changes to this package while working on a project that imports this library, you'll want to link your project to the local version. This will let you use the unpublished version, without pushing to npm and re-installing. More info in the [NPM Documentation](https://docs.npmjs.com/cli/v8/commands/npm-link)
 
