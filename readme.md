@@ -79,6 +79,29 @@ Install into your example app:
 npm install trivial-core --package-lock-only
 ```
 
+## External Actions
+You can supplement the catalog of actions trivial-core ships with.
+
+Using gulp or a similar pre-builder, copy the action files into the package's action directory and build:
+
+```javascript
+const { ActionRegistry } = require('trivial-core')
+const actionRegistry = new ActionRegistry()
+
+// Copy the files from your app into the package
+function copyActionFiles(){
+  return gulp.src(`source/lib/actions/**`) // this is the location of the new actions in your project
+    .pipe(gulp.dest(`${actionRegistry.actionsRoot}/actionsv2/actions`)) // internal action location; unlikely you need to change this
+}
+
+// Define a gulp task to call the copyActionFiles function, then rebuild the registry
+gulp.task('build', gulp.series(copyActionFiles, actionRegistry.build)
+
+// In the shell, run the gulp task to copy the files to trivial-core and rebuild the action library files.
+gulp build
+
+```
+
 ## Publishing
 Bump the version following the [symantic versioning spec](https://docs.npmjs.com/about-semantic-versioning). Commit and push. Then:
 
