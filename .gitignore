@@ -1,3 +1,4 @@
 /node_modules/*
 /templates/**/node_modules
 /slugs/*
+/lib/models-dynamic/*
