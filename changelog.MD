@@ -1,10 +1,10 @@
 
 # Trivial-Core Changelog
 
-## 1.2.5
+## 1.3.1
 Allow load before dynamic files have been generated
 
-## 1.2.4
+## 1.3.0
 Prefer internal secret storage w/AWS as fallback
 
 ## 1.2.3
