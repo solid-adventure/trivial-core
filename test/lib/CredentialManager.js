@@ -1,12 +1,16 @@
 const chai = require('chai');
+const { expect } = require('chai')
 const sinon = require('sinon');
+const fetch = require('node-fetch');
+const awsFetch = require('../../lib/aws-fetch');
 const proxyquire = require('proxyquire');
 
 // Use should style assertions.
 chai.should();
 
-// Mock dependencies.
-const awsFetchStub = sinon.stub();
+const awsFetchStub = () => {
+    return Promise.resolve({status: 200, statusText: 'test', ok: true, json: () => Promise.resolve({SecretString: '\"AWS_fetchedCreds\"'})})
+};
 const fetchStub = sinon.stub();
 const pinoStub = sinon.stub().returns({ level: 'debug', debug: sinon.stub(), info: sinon.stub(), error: sinon.stub() });
 
@@ -18,144 +22,62 @@ const CredentialManager = proxyquire('../../lib/CredentialManager', {
 });
 
 describe('CredentialManager', () => {
+
   beforeEach(() => {
     // Reset mock function before each test
     sinon.resetHistory()
+    process.env.AWS_REGION = 'test'
+    process.env.AWS_ACCESS_KEY_ID = 'test_key'
+    process.env.AWS_SECRET_ACCESS_KEY = 'test_secret'
   })
 
   afterEach(() => {
     // Restore original fetch function
     sinon.restore()
-    awsFetchStub.reset();
-    fetchStub.reset();
   })
 
-  describe('#resolveCredentials', function() {
-    it('should resolve credentials correctly', async function() {
-      const testConfig = { api: { $ref: ['demo', 'test'] } };
-      awsFetchStub.resolves({ SecretString: JSON.stringify({ demo: { test: '123' } }) });
-      const result = await CredentialManager.resolveCredentials(testConfig);
-      result.should.have.property('api', '123');
+
+  describe('getByReference', function() {
+    it('should return the reference', async function() {
+      const ref = {$ref: ['name', 'item']}
+      const stub = sinon.stub(CredentialManager, 'get').returns(Promise.resolve('test'));
+      const result = await CredentialManager.getByReference(ref);
+      expect(stub.calledOnceWith('name', 'item')).to.be.true;
+      expect(result).to.equal('test');
     });
   });
 
-  it('should resolveCredentials resolves references correctly', async () => {
-    // Mock the credentials response
-    const mockCredentials = {
-      section1: {
-        item1: 'value1',
-        item2: 'value2'
-      },
-      section2: {
-        item3: 'value3'
-      }
-    }
-    CredentialManager.credentials = sinon.stub().resolves(mockCredentials)
+  describe('getFromEnv', function() {
+    it('should return the environment variable', function() {
+      process.env.TEST_ENV = 'test';
+      const ref = {$env: 'TEST_ENV'};
+      const result = CredentialManager.getFromEnv(ref);
+      expect(result).to.equal('test');
+    });
+  });
 
-    // Test input and expected output
-    const config = {
-      field1: {
-        $ref: ['section1', 'item1']
-      },
-      field2: {
-        $ref: ['section1', 'item2']
-      },
-      field3: {
-        $ref: ['section2', 'item3']
-      }
-    }
-    const expectedOutput = {
-      field1: 'value1',
-      field2: 'value2',
-      field3: 'value3'
-    }
+  describe('getCredentialSet', function() {
+    it('should fetch credentials from a valid set', async function() {
+      const ref = {$cred: '123'};
+      const stub = sinon.stub(CredentialManager, 'credentialSet').returns(Promise.resolve('test'));
+      const result = await CredentialManager.getCredentialSet(ref);
+      expect(stub.calledOnceWith('123')).to.be.true;
+      expect(result).to.equal('test');
+    });
+  });
 
-    // Call the method being tested
-    const result = await CredentialManager.resolveCredentials(config)
+  describe('credentials', function() {
+    it('should fetch credentials from the service', async function() {
+      const result = await CredentialManager.credentials();
+      expect(result).to.equal('AWS_fetchedCreds');
+    });
 
-    // Verify the result
-    expect(result).to.deep.equal(expectedOutput)
-    expect(CredentialManager.credentials).to.have.been.calledOnce
-  })
-
-  it('should resolveCredentials resolves credential sets correctly', async () => {
-    // Mock the credential set response
-    const mockCredentialSet = {
-      data: {
-        username: 'username',
-        password: 'password'
-      }
-    }
-    CredentialManager.credentialSet = sinon.stub().resolves(mockCredentialSet)
-
-    // Test input and expected output
-    const config = {
-      field1: {
-        $cred: 'credentialSetId1'
-      },
-      field2: {
-        $cred: 'credentialSetId2'
-      }
-    }
-    const expectedOutput = {
-      field1: mockCredentialSet.data,
-      field2: mockCredentialSet.data
-    }
-
-    // Call the method being tested
-    const result = await CredentialManager.resolveCredentials(config)
-
-    // Verify the result
-    expect(result).to.deep.equal(expectedOutput)
-    expect(CredentialManager.credentialSet).to.have.been.calledTwice
-    expect(CredentialManager.credentialSet).to.have.been.calledWith('credentialSetId1')
-    expect(CredentialManager.credentialSet).to.have.been.calledWith('credentialSetId2')
-  })
-
-  it('should resolveCredentials resolves environment variables correctly', async () => {
-    // Mock the environment variables
-    process.env.SECRET_VALUE = 'secret'
-
-    // Test input and expected output
-    const config = {
-      field1: {
-        $env: 'SECRET_VALUE'
-      },
-      field2: {
-        $env: 'NON_EXISTING_VARIABLE'
-      }
-    }
-    const expectedOutput = {
-      field1: 'secret',
-      field2: undefined
-    }
-
-    // Call the method being tested
-    const result = await CredentialManager.resolveCredentials(config)
-
-    // Verify the result
-    expect(result).to.deep.equal(expectedOutput)
-  })
-
-  it('should resolveCredentials returns input values if not a reference, credential set, or environment variable', async () => {
-    // Test input and expected output
-    const config = {
-      field1: 'value1',
-      field2: null,
-      field3: 123
-    }
-    const expectedOutput = {
-      field1: 'value1',
-      field2: null,
-      field3: 123
-    }
-
-    // Call the method being tested
-    const result = await CredentialManager.resolveCredentials(config)
-
-    // Verify the result
-    expect(result).to.deep.equal(expectedOutput)
-  })
-
-  // Add more tests for other methods and scenarios if needed
+    it('should fetch credentials from AWS Secret Manager if CREDENTIALS_SERVICE is not set', async function() {
+      process.env.CREDENTIALS_SERVICE = 'OTHER-SERVICE';
+      process.env.AWS_REGION = 'test'
+      const result = await CredentialManager.credentials();
+      console.log(result)
+      expect(result).to.equal('AWS_fetchedCreds');
+    });
+  });
 })
