@@ -8,16 +8,17 @@ const GitManager = require('../../lib/GitManager')
 
 describe("GitManager", () => {
 
+  // TODO Turn these into actual tests vs the demo it is now
   describe('initializes repo', () => {
-
-    // let github_repo = 'https://github.com/solid-adventure/slug-example.git'
-
-    let org='solid-adventure'
-    let repo='slug-example'
-    let branch='main'
-    let local_path = 'test/support/slug-example/'
-    let gitManager = new GitManager(org, repo, branch, local_path)
-    gitManager.pushDirectory()
+    // let org='solid-adventure'
+    // let repo='slug-example'
+    // let branch='main'
+    // let local_path = 'test/support/slug-example/'
+    // let author_name = 'Test Suite'
+    // let author_email = 'test@withtrivial.com'
+    // let gitManager = new GitManager(org, repo, branch, local_path, author_name, author_email)
+    // let message = `My test commit message`
+    // gitManager.pushDirectory(message)
 
 
 
