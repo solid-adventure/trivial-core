@@ -18,6 +18,6 @@ const local_path = 'examples/support/slug-example/'
 const author_name = 'Test Suite'
 const author_email = 'test@withtrivial.com'
 const gitManager = new GitManager(org, repo, branch, local_path, author_name, author_email)
-const message = `My test commit message`
+const message = `Example commit message`
 gitManager.pushChanges(message)
 
