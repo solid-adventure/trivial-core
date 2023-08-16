@@ -5,8 +5,10 @@
 Prefer internal secret storage w/AWS as fallback
 
 ## 1.2.5
-Support for pushing app slugs to GitHub on build.
-Support for skipping AWS Lambda default build
+#### Note: Requires Node >=18.x, previously Node >=14.x
+
+- Support for pushing app slugs to GitHub on build.
+- Support for skipping AWS Lambda default build
 
 ## 1.2.4
 Allow load before dynamic files have been generated
