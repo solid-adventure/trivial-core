@@ -2,13 +2,11 @@
 # Trivial-Core Changelog
 
 ## 1.3.0
-Prefer internal secret storage w/AWS as fallback
-
-## 1.2.5
 #### Note: Requires Node >=18.x, previously Node >=14.x
 
-- Support for pushing app slugs to GitHub on build.
-- Support for skipping AWS Lambda default build
+- Adds support for pushing app slugs to GitHub on build.
+- Adds support for skipping AWS Lambda build
+- Adds support for external templates
 
 ## 1.2.4
 Allow load before dynamic files have been generated
