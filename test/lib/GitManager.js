@@ -13,15 +13,8 @@ const gitAttrs = {
   author_email: 'test@withtrivial.com'
 }
 const gitManager = new GitManager(...Object.values(gitAttrs))
-let getCommitStub;
-
-
-after( () => {
-  fs.rmdir(gitAttrs.local_path)
-})
 
 describe("GitManager", () => {
-
 
   it('should initialize', () => {
     expect(gitManager).to.be.instanceOf(GitManager)
@@ -66,6 +59,9 @@ describe("GitManager", () => {
 
 })
 
+after( () => {
+  fs.rm(gitAttrs.local_path, {recursive: true})
+})
 
 before( async ()=> {
   await fs.mkdir(path.join(gitAttrs.local_path, '.github', 'workflows'), {recursive: true})
@@ -73,7 +69,6 @@ before( async ()=> {
   fs.writeFile(path.join(gitAttrs.local_path, '.env'), "hidden file")
   fs.writeFile(path.join(gitAttrs.local_path, '.github', 'workflows','ci.yml'), "hidden github config")
 
-  // This potentially pollutes the global name space, but using sinon stub methods is not compatiable with octokit
   gitManager.octokit = {
     rest: {
       git: {
