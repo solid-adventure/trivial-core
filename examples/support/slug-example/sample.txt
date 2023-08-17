@@ -1,0 +1,3 @@
+This is a simple text file to demonstrate committing changes.
+
+Rev 2
