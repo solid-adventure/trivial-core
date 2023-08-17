@@ -2,9 +2,7 @@ const chai = require('chai')
 const expect = chai.expect
 const fs = require('fs').promises
 const path = require('path')
-// const sinon = require('sinon')
 const GitManager = require('../../lib/GitManager')
-// chai.use(require('sinon-chai'))
 
 const gitAttrs = {
   org: 'solid-adventure',
@@ -33,10 +31,19 @@ describe("GitManager", () => {
   it('should set the path list', async () => {
     expect(gitManager.filesPaths).to.be.undefined
     await gitManager.setPathList()
+    expect(gitManager.filesPaths).not.to.be.undefined
+  })
+
+  it ('should add paths in the local path, including whitelisted hidden files', async () => {
+    await gitManager.setPathList()
     expect(gitManager.filesPaths).to.eql([
       'tmp/slug-example/temp.txt',
       'tmp/slug-example/.github/workflows/ci.yml'
     ])
+  })
+
+  it ('should not send unwhitelisted hidden files', async () => {
+    await gitManager.setPathList()
     expect(gitManager.filesPaths).not.to.include('tmp/slug-example/.env')
   })
 
