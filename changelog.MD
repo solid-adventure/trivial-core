@@ -1,6 +1,9 @@
 
 # Trivial-Core Changelog
 
+## 1.3.1
+- Adds support for pulling app slugs from GitHub
+
 ## 1.3.0
 #### Note: Requires Node >=18.x, previously Node >=14.x
 
