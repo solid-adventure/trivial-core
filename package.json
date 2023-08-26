@@ -4,7 +4,8 @@
   "description": "Build event processors to apply business rules",
   "main": "index.js",
   "scripts": {
-    "test": "mocha 'test/**/*.js'"
+    "test": "node build.js && mocha 'test/**/*.js'",
+    "build": "node build.js"
   },
   "author": "",
   "license": "ISC",
