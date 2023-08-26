@@ -57,6 +57,11 @@ describe("GitManager", () => {
     expect(newTree.sha).to.eql('newTreeMockSha')
   })
 
+  it('should return the current head from a pull', async () => {
+    const currentCommit = await gitManager.pullChanges()
+    expect(currentCommit.treeSha).to.eql('mocktreesha')
+  })
+
 })
 
 after( () => {
@@ -71,6 +76,13 @@ before( async ()=> {
 
   gitManager.octokit = {
     rest: {
+      repos: {
+        getContent: () => {
+          return {
+            data: []
+          }
+        }
+      },
       git: {
         getRef: () => {
           return { 
