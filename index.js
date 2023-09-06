@@ -1,6 +1,7 @@
 // module.exports.ActionCreator = require('./lib/ActionCreator')
 module.exports.ActionInput = require('./lib/actionsv2/ActionInput')
 module.exports.ActionRegistry = require('./lib/ActionRegistry')
+module.exports.ActivityEntry = require('./lib/ActivityEntry')
 module.exports.AppBuilder = require('./lib/AppBuilder')
 module.exports.AppManager = require('./lib/AppManager')
 module.exports.AppTemplate = require('./lib/AppTemplate')

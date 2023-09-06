@@ -9,6 +9,25 @@ chai.use(require('sinon-chai'))
 
 describe("AppBuilder", () => {
 
+  describe('_saveBundleToManifest', () => {
+    let builder = new AppBuilder('UnitTest')
+    let template = new AppTemplate('webhook_relay', '0.1')
+    let manifest = null
+    var spy = sinon.spy()
+
+    before(async () => {
+      manifest = await template.initialManifest()
+      manifest.deploy_via = "skip aws"
+    })
+
+    it('saves bundle to manifest on build', async () => {
+      let spy = sinon.spy(builder, '_saveBundleToManifest')
+      await builder.build(manifest)
+      expect(spy.calledOnce).to.eq(true)
+    })
+
+  })
+
   describe('_createLambda', () => {
     let builder = new AppBuilder('UnitTest')
     let template = new AppTemplate('webhook_relay', '0.1')
