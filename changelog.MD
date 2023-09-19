@@ -1,6 +1,8 @@
 
 # Trivial-Core Changelog
 
+## 1.3.3
+- ActionDescriptor can specify a condition that must be met for the action to run
 
 ## 1.3.2
 - Adds support for saving an archived slug to the manifest API on build
