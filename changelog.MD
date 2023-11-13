@@ -1,6 +1,9 @@
 
 # Trivial-Core Changelog
 
+## 1.4.0
+- AWS Lambdas now run on Node 18.x instead of Node 14.x
+
 ## 1.3.3
 - ActionDescriptor can specify a condition that must be met for the action to run
 
