@@ -1,6 +1,6 @@
 {
   "name": "trivial-core",
-  "version": "1.3.3",
+  "version": "1.4.0",
   "description": "Build event processors to apply business rules",
   "main": "index.js",
   "scripts": {
