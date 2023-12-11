@@ -62,6 +62,8 @@ npm test
 ## Local Development
 If you're making changes to this package while working on a project that imports this library, you'll want to link your project to the local version. This will let you use the unpublished version, without pushing to npm and re-installing. More info in the [NPM Documentation](https://docs.npmjs.com/cli/v8/commands/npm-link)
 
+Note: If the Node versions are not the same for the package and the project you're importing into, `npm link` fail silently.
+
 Make a global link to the local package directory:
 ```shell
 cd ./trivial-core
