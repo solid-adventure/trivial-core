@@ -60,15 +60,17 @@ npm test
 ```
 
 ## General Development
-When running `trivial-core` is is necessary to build an `ActionRegistry` to use a large amount of functionality
+When running `trivial-core` is is necessary to build an `ActionRegistry` to use a large amount of functionality.
+
 If running locally, this can be accomplished by running the following commands via a script in your `trivial-core` directory
-```
+```javascript
 register = new ActionRegistry
 register.build()
 ```
-For use as a dependency in a project or in a server envirnement you will need to construct the `ActionRegistry` as a part of your build step.
-For example, if running your project within a Dockerfile you might create a `build.js` script to run as a part of your` Dockerfile`
-```
+For use as a dependency in a project or in a server environment you will need to construct the `ActionRegistry` as a part of your build step or local to the server in a similar way to above.
+
+For example, if running `trivial-core` as dependency in a project built with Docker you might create a `build.js` script to run as a part of your` Dockerfile`
+```javascript
 # build.js
 const { ActionRegistry } = require('trivial-core')
 const actionRegistry = new ActionRegistry()
