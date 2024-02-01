@@ -59,14 +59,51 @@ npm test
 //  2 pending
 ```
 
+## General Development
+**When running** `trivial-core` **it is necessary to build the** `ActionRegistry`
+
+In a local or server environment this is accomplished by entering the containing directory and running `npm run build` which includes all necessary logic.
+
+However, when using `trivial-core` as dependency in a project or within a container you will need to construct the `ActionRegistry` as a part of your build step.
+
+For example, if running your project within Docker you might create a `build.js` script to run as a part of your `Dockerfile`:
+```javascript
+# build.js
+const { ActionRegistry } = require('trivial-core')
+const actionRegistry = new ActionRegistry()
+
+console.log("Building ActionRegistry...")
+
+try {
+  actionRegistry.build()
+  console.log("ActionRegistry built")
+} catch (err) {
+  console.log("Failed to build ActionRegistry")
+  console.error(err)
+}
+
+# package.json
+[other package information]
+"scripts": {
+  [your other scripts]
+  "build": "node build.js"
+}
+
+# dockerfile
+[other build logic]
+RUN npm run build
+
+```
+
 ## Local Development
 If you're making changes to this package while working on a project that imports this library, you'll want to link your project to the local version. This will let you use the unpublished version, without pushing to npm and re-installing. More info in the [NPM Documentation](https://docs.npmjs.com/cli/v8/commands/npm-link)
 
-Note: If the Node versions are not the same for the package and the project you're importing into, `npm link` fail silently.
+**Note: If the Node versions are not the same for the package and the project you're importing into, `npm link` fail silently.**
 
 Make a global link to the local package directory:
 ```shell
 cd ./trivial-core
+nvm use vX.X.X # X.X.X should be match the dependent project's node version
 npm link
 ```
 
