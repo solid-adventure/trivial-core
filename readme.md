@@ -85,13 +85,12 @@ try {
   console.error(err)
 }
 
-#package.json
-...
+# package.json
+[other package information]
 "scripts": {
   [your other scripts]
   "build": "node build.js"
 }
-...
 
 # dockerfile
 [other build logic]
