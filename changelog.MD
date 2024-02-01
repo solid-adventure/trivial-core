@@ -1,6 +1,12 @@
 
 # Trivial-Core Changelog
 
+## 1.6.0
+- LUPIN_URL renamed to TRIVIAL_UI_URL
+
+## 1.5.0
+- AppBuilder.writeLocally accepts a path to override default
+
 ## 1.4.0
 - AWS Lambdas now run on Node 18.x instead of Node 14.x
 
