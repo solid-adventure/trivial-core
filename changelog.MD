@@ -1,6 +1,9 @@
 
 # Trivial-Core Changelog
 
+## 1.6.1
+- Switch to an unsigned cookie to support browser session handling, instead of only the Express server
+
 ## 1.6.0
 - LUPIN_URL renamed to TRIVIAL_UI_URL
 
