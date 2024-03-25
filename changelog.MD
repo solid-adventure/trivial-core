@@ -1,6 +1,9 @@
 
 # Trivial-Core Changelog
 
+## 1.6.2
+- Adds support for using custom functions in action conditions
+
 ## 1.6.1
 - Switch to an unsigned cookie to support browser session handling, instead of only the Express server
 
