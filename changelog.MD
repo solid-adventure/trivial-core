@@ -1,6 +1,9 @@
 
 # Trivial-Core Changelog
 
+## 1.6.3
+- Fixes a bug where custom functions in action conditions throw $utils is not defined
+
 ## 1.6.2
 - Adds support for using custom functions in action conditions
 
