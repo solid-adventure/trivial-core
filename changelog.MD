@@ -3,7 +3,7 @@
 
 ## 1.6.4
 - Adds support for using custom functions in action conditions
-- Replaces 1.6.2 and 1.6.3, with subtly broken versions of this feature
+- Replaces 1.6.2 and 1.6.3, with slightly broken versions of this feature
 
 ## 1.6.1
 - Switch to an unsigned cookie to support browser session handling, instead of only the Express server
