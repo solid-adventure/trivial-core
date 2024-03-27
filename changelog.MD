@@ -1,11 +1,9 @@
 
 # Trivial-Core Changelog
 
-## 1.6.3
-- Fixes a bug where custom functions in action conditions throw $utils is not defined
-
-## 1.6.2
+## 1.6.4
 - Adds support for using custom functions in action conditions
+- Replaces 1.6.2 and 1.6.3, with subtly broken versions of this feature
 
 ## 1.6.1
 - Switch to an unsigned cookie to support browser session handling, instead of only the Express server
