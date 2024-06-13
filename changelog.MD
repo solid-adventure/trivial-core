@@ -1,6 +1,9 @@
 
 # Trivial-Core Changelog
 
+## 1.6.5
+- Adds support for relating ActivityEntries to RegisterItems in trivial-api
+
 ## 1.6.4
 - Adds support for using custom functions in action conditions
 - Replaces 1.6.2 and 1.6.3, with slightly broken versions of this feature
