@@ -1,6 +1,9 @@
 
 # Trivial-Core Changelog
 
+## 1.6.6
+- Updated non-breaking packages to address security warnings 
+
 ## 1.6.5
 - Adds support for relating ActivityEntries to RegisterItems in trivial-api
 
