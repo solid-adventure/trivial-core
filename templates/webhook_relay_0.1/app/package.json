@@ -9,7 +9,7 @@
     "gulp": "^5.0.0",
     "javascript-time-ago": "^2.3.13",
     "jsonwebtoken": "^8.5.1",
-    "mailgun.js": "^7.0.2",
+    "mailgun.js": "^10.2.3",
     "mysql": "^2.18.1",
     "node-fetch": "^2.6.1",
     "pg": "^7.17.0",
