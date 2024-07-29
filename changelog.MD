@@ -1,6 +1,9 @@
 
 # Trivial-Core Changelog
 
+## 1.6.7
+- bumps jwt dependencies to 9.0.0
+
 ## 1.6.6
 - Updated non-breaking packages to address security warnings 
 - Updated non-breaking webhook_relay template packages to address security warnings
