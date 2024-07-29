@@ -3,6 +3,9 @@
 
 ## 1.6.6
 - Updated non-breaking packages to address security warnings 
+- Updated non-breaking webhook_relay template packages to address security warnings
+- Bumped webhook_relay's gulp dependency to 5.0.0
+- Removed kafka_consumer template
 
 ## 1.6.5
 - Adds support for relating ActivityEntries to RegisterItems in trivial-api
