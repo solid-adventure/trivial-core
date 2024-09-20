@@ -8,7 +8,15 @@ const {
 
 describe('CodeCompletionGenerator', () => {
 
+
+
   describe('._path', () => {
+
+    it('identifies an async function', () => {
+      let gen = new CodeCompletionGenerator('async function foo() { return 42 }', {singleExpression: false})
+      expect(gen.isAsync()).to.be.true
+    })
+
     it('produces an empty path for an empty string', () => {
       expect(path(new CodeCompletionGenerator(''))).to.be.null
     })
@@ -251,6 +259,11 @@ describe('CodeCompletionGenerator', () => {
       dataSample: {order: {id: 1234, status: 'picked', total_amt: '100.00'}}
     }
 
+    it('does not evaluate an async function', async () => {
+      let gen = new CodeCompletionGenerator('async function foo() { return 42 }', {singleExpression: false})
+      expect(await gen.evaluatesAs()).to.be.undefined
+    })
+
     it('returns the expression value when it is valid', () => {
       let gen = new CodeCompletionGenerator('order.status', opts)
       expect(gen.evaluatesAs()).to.eq('picked')
@@ -393,6 +406,13 @@ describe('CodeCompletionGenerator', () => {
   })
 
   describe(".firstDefinedFunctionName()", () => {
+
+    it('identifies the name of an async function', () => {
+      let gen = new CodeCompletionGenerator('async function foo() { return 42 }', {singleExpression: false})
+      expect(gen.firstDefinedFunctionName()
+      ).to.eql('foo')
+    })
+
     it('identifies function declaration names', () => {
       expect(
         new CodeCompletionGenerator('function foo() { }', {singleExpression: false})
